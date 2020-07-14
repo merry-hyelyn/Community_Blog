@@ -1,0 +1,82 @@
+[
+	{
+		"model": "users.user",
+		"pk": 1,
+		"fields": {
+			"password": "pbkdf2_sha256$180000$uoTIIpSTBaSM$4vNd/SjeP+YglI7RvGR96lgUPN0LJnkxW7s8gHCpqyo=",
+			"last_login": "2020-06-29T04:32:28.358Z",
+			"is_superuser": true,
+			"username": "admin",
+			"first_name": "",
+			"last_name": "",
+			"email": "",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2020-06-15T11:59:48Z",
+			"permission": "admin",
+			"step": "zero",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "users.user",
+		"pk": 17,
+		"fields": {
+			"password": "pbkdf2_sha256$180000$HGtITVE0k4v9$89I3izKqYdGRyLBdZsEr88FX7o2y3EivAcG7fUSlbLk=",
+			"last_login": "2020-06-29T04:06:00.494Z",
+			"is_superuser": false,
+			"username": "staff",
+			"first_name": "",
+			"last_name": "",
+			"email": "h1335@naver.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2020-06-29T03:24:47Z",
+			"permission": "staff",
+			"step": "zero",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "users.user",
+		"pk": 18,
+		"fields": {
+			"password": "pbkdf2_sha256$180000$bqr7Iy1CQiXO$SgqVVu9g9FoNA6tSPevMebDMtViAB1Tf7bQBtjTpV7M=",
+			"last_login": "2020-06-29T04:07:42.357Z",
+			"is_superuser": false,
+			"username": "test2",
+			"first_name": "",
+			"last_name": "",
+			"email": "t@naver.com",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2020-06-29T03:40:26Z",
+			"permission": "normal",
+			"step": "two",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "users.user",
+		"pk": 19,
+		"fields": {
+			"password": "pbkdf2_sha256$180000$pN6cffjgndUU$JBIsxown6h/eSsN5/8wGDEZJPzpW72zq/pgJtf5WSTA=",
+			"last_login": "2020-06-29T08:59:59.495Z",
+			"is_superuser": false,
+			"username": "test1",
+			"first_name": "",
+			"last_name": "",
+			"email": "t@naver.com",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2020-06-29T04:07:07.234Z",
+			"permission": "normal",
+			"step": "one",
+			"groups": [],
+			"user_permissions": []
+		}
+	}
+]

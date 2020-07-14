@@ -1,0 +1,38 @@
+
+{% extends 'base.html' %}
+{% block page-name %}DETAIL{% endblock page-name %}
+{% block content %}
+
+<script type="text/javascript">
+function checkPermission(post,user){
+    if(post !== user){
+        alert("작성자가 아니기 때문에 수정할 수 없습니다.")
+        return false;
+    }
+    return true;
+}
+</script>
+
+<div class="text-center text-2xl text-blue-900 font-bold mb-6">{{post.title}}</div>
+{% csrf_token %}
+<div class="w-full flex item-center justify-center">
+<div class="px-32 py-10 border-solid border-4 border-gray-800 text-center shadow-2xl">
+{{ post.user }}<br>
+{{ post.content }}<br><br>
+{{post.created_at}}<br>
+{{post.updated_at}}<br><br>
+
+
+<a href={% url 'update' post.id %} 
+onclick="return checkPermission('{{post.user}}','{{user}}');"
+class="text-3xl">🖌</a>
+<a href="{% url 'index' %}"><button class="bg-blue-900 text-white hover:bg-green-600 font-bold py-2 px-4 rounded-full">home</button></a>
+{% if user.is_staff or user.if_superuser %}
+
+<a href="{% url 'delete' post.id%}" 
+onclick="return confirm('정말 삭제하시겠습니까?')"
+class="bg-red-600 text-white hover:bg-red-400 font-bold py-2 px-4 rounded-full">
+delete</a>
+</div></div>
+{% endif %}
+{% endblock content %}

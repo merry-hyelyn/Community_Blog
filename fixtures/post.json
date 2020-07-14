@@ -1,0 +1,41 @@
+[
+	{
+		"model": "posts.post",
+		"pk": 19,
+		"fields": {
+			"created_at": "2020-06-29T04:05:21.218Z",
+			"updated_at": "2020-06-29T04:05:21.218Z",
+			"title": "\ube44\ubc00",
+			"content": "\ube44\ubc00\uae00~",
+			"user": 1,
+			"board": 16,
+			"secret": "true"
+		}
+	},
+	{
+		"model": "posts.post",
+		"pk": 20,
+		"fields": {
+			"created_at": "2020-06-29T04:06:19.349Z",
+			"updated_at": "2020-06-29T04:06:41.270Z",
+			"title": "\uc218\uc815",
+			"content": "\uc218\uc815\u3147",
+			"user": 17,
+			"board": 17,
+			"secret": "false"
+		}
+	},
+	{
+		"model": "posts.post",
+		"pk": 21,
+		"fields": {
+			"created_at": "2020-06-29T04:08:09.213Z",
+			"updated_at": "2020-06-29T04:08:09.213Z",
+			"title": "step2",
+			"content": "2\ub2e8\uacc4\ub294 \uae00 \uc791\uc131 \uac00\ub2a5",
+			"user": 18,
+			"board": 17,
+			"secret": "true"
+		}
+	}
+]

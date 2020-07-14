@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="text-gray-900 antialiased leading-tight">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <title>{% block page-name %}{% endblock page-name %} | 개발이야기</title>
+</head>
+<body class="pt-40 mx-auto px-4 min-h-screen bg-gray-100">
+    <div class="text-center text-6xl text-blue-900">👨🏻‍💻DEV Community👩🏻‍💻</div><br><br> 
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

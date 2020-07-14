@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block page-name %}BOARD{% endblock page-name %}
+
+{% block content %}
+
+<div class="w-full flex item-center justify-center">
+<div class="inline-block px-32 py-10 border-solid border-4 border-gray-800 text-center shadow-2xl">
+
+<form action="{% url 'new'%}" method="POST">
+{% csrf_token %}
+
+{{board_form.name.label_tag}}
+<div class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
+{{board_form.name}}</div><br>
+
+{{board_form.path.label_tag}}
+<div class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
+{{board_form.path}}</div><br>
+
+게시판 생성자 : 
+<div class="inline-block">
+{{ user }}</div>
+<br><br>
+<button type = "submit"
+class="bg-blue-900 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
+Add</button>
+<button class="text-red-600 font-bold py-2 px-4 rounded-full">
+<a href="{% url 'index' %}">Cancel</a></button>
+
+</form></div></div>
+{% endblock content %}
