@@ -1,22 +1,16 @@
 from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import render, redirect
 from boards.forms import BoardForm
+from django.views.generic import CreateView
 
 
 @user_passes_test(lambda u: u.is_staff or u.is_superuser, login_url="index")
-def new(request):
-    if request.method == "POST":
-        board_form = BoardForm(request.POST)
-        if board_form.is_valid():
-            board = board_form.save(commit=False)
-            board.create_user = request.user
-            board.save()
-            return redirect('index')
+class CreateBoard(CreateView):
+    form_class = BoardForm
+    template_name = "boards/new.html"
+    success_url = "../../index"
 
-    else:
-        board_form = BoardForm()
-        user = request.user
-        return render(request, "boards/new.html", {
-            "board_form": board_form,
-            "user": user,
-        })
+    # method == POST 일 때 실행
+    def form_valid(self, form):
+        print(self.request.user)
+        form.instance.create_user = self.request.user
+        return super(CreateBoard, self).form_valid(form)

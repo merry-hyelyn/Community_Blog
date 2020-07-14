@@ -68,7 +68,7 @@
   {% endfor %}
 
   {% if user.is_staff or user.is_superuser %}
-    <a href="{% url 'new'%}" class="bg-white inline-block py-2 px-4 text-blue-800 hover:text-green-600 font-bold">+</a>
+    <a href="{% url 'create'%}" class="bg-white inline-block py-2 px-4 text-blue-800 hover:text-green-600 font-bold">+</a>
 {% endif %}
 </ul>
 
