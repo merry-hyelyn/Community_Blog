@@ -11,21 +11,21 @@
 
 {% csrf_token %}
 
-{{post_form.title.label_tag}}
+{{form.title.label_tag}}
 <div class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
-{{post_form.title}}</div><br>
+{{form.title}}</div><br>
 
-{{post_form.content.label_tag}}
+{{form.content.label_tag}}
 <div class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
-{{post_form.content}}</div><br>
+{{form.content}}</div><br>
 
-<div class="inline px-2">{{post_form.board.label_tag}}</div>
+<div class="inline px-2">{{form.board.label_tag}}</div>
 <div class="inline-block bg-red-400">
-{{post_form.board}}</div><br><br>
+{{form.board}}</div><br><br>
 
 <div class="inline px- text-2xl pl-1">🔒</div>
 <div class="inline-block bg-red-400">
-{{post_form.secret}}</div><br>
+{{form.secret}}</div><br>
 <div class="text-red-700 text-sm">* 비밀글 설정 시 true로 바꿔주세요!</div><br>
 
 <button type="submit"

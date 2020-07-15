@@ -17,20 +17,3 @@ class IndexView(TemplateView):
         posts = Post.objects.filter(board__path=path)
         context['post_list'] = posts
         return context
-
-
-def index(request, path=None):
-    boards = Board.objects.all()
-    posts = None
-
-    if not path:
-        path = "main"
-
-    else:
-        posts = Post.objects.filter(board__path=path)
-
-    return render(request, "core/index.html", {
-        "boards": boards,
-        "path": path,
-        "posts": posts
-    })
