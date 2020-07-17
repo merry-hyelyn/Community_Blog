@@ -21,6 +21,9 @@ class Post(AbstractTimeStamp):
     secret = models.CharField(max_length=10,
                               choices=SECRET_CHOICES,
                               default=FALSE)
+    file = models.FileField(upload_to="documents/%Y/%m/%d/", null=True)
+
+    # file = models.FileField(null=True)
 
     def __str__(self):
         return self.title
