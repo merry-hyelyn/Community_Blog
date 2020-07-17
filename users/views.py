@@ -1,41 +1,37 @@
-from django.shortcuts import render, redirect, reverse
-from django.contrib import auth, messages
 from users.forms import UserForm
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from users.models import User
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 
-# Create your views here.
-def signup(request):
-    if request.method == "POST":
-        user_form = UserForm(request.POST)
-        if user_form.is_valid():
-            new_user = User.objects.create_user(**user_form.cleaned_data)
-            new_user.save()
-        return redirect("login")
+class UserLoginView(LoginView):
+    template_name = "users/login.html"
+    success_url = reverse_lazy("home")
 
-    else:
-        user_form = UserForm()
-        return render(request, "users/signup.html", {"user_form": user_form})
+    def post(self, request):
+        form = self.get_form()
 
+        if form.is_valid():
+            return self.form_valid(form)
 
-def login(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["pwd"]
-        user = auth.authenticate(request, username=username, password=password)
-
-        if user is not None:
-            auth.login(request, user)
         else:
-            messages.add_message(request, messages.ERROR,
-                                 "Username or password is incorrect.")
-
-        return redirect(reverse("index"))
-    else:
-        return render(request, "core/index.html")
+            return self.form_invalid(form)
 
 
-def logout(request):
-    auth.logout(request)
-    return redirect(reverse("index"))
+class UserSignupView(CreateView):
+    template_name = "users/signup.html"
+    model = User
+    form_class = UserForm
+    success_url = reverse_lazy("home")
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.set_password(form.cleaned_data['password'])
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class UserLogoutView(LogoutView):
+    template_name = "core/index.html"
