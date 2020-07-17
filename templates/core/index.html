@@ -37,7 +37,7 @@
 {% if user.is_authenticated %}
 <div class="text-center text-2xl text-blue-900 font-bold">Board</div><br><br>
 <div class="w-full flex item-center justify-center">
-<div class="inline-block px-24 py-10 border-solid border-4 border-gray-800 shadow-2xl ml-128">
+<div class="box-content h-auto w-64 inline-block px-24 py-10 border-solid border-4 border-gray-800 shadow-2xl ml-128">
 
 <div class="text-blue-900 whitespace-no-wrap text-right">
 
@@ -101,26 +101,13 @@ onclick="return checkSecret('{{post.user}}','{{post.secret}}');">
 </div>
 </div>
 
-
 {% else%}
 <div class="text-center text-2xl text-blue-900 font-bold mb-6">Log In</div><br><br>
 <div class="w-full flex item-center justify-center">
-<form method="POST" action="{% url 'login' %}">
 <div class="inline-block px-32 py-10 border-solid border-4 border-gray-800 text-center shadow-2xl">
-{% csrf_token %}
-아이디(username):
-<br>
-<input id="username" name="username" type="text" value=""
-class = "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
-<br>
-비밀번호(password):
-<br>
-<input type="password" id="pwd" name="pwd" value=""
-class = "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
-<br>
-<button type="submit" class="bg-blue-900 text-white hover:bg-green-600 font-bold py-2 px-4 rounded-full">Sign In</button>
-</form>
 
+<button class="bg-blue-900 text-white hover:bg-green-600 font-bold py-2 px-4 rounded-full
+"><a href="{% url 'login' %}">Sign In</a></button>
 <button class="text-blue-900 hover:text-green-600 font-bold py-2 px-4 rounded-full"><a href="{% url 'signup'%}">Sign Up</a></button>
 </div>
 </div></div>

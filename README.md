@@ -10,3 +10,6 @@
 - [x] posts/views.py - 'post detail'
 - [x] posts/views.py - 'post delete'
 - [x] posts/views.py - 'post create' 
+- [x] users/views.py - 'user sign in' 
+- [x] users/views.py - 'user sign out' 
+- [x] users/views.py - 'user sign up'  

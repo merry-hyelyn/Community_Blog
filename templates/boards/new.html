@@ -9,13 +9,13 @@
 <form action="{% url 'create'%}" method="POST">
 {% csrf_token %}
 
-{{board_form.name.label_tag}}
+{{form.name.label_tag}}
 <div class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
-{{board_form.name}}</div><br>
+{{form.name}}</div><br>
 
-{{board_form.path.label_tag}}
+{{form.path.label_tag}}
 <div class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
-{{board_form.path}}</div><br>
+{{form.path}}</div><br>
 
 게시판 생성자 : 
 <div class="inline-block">

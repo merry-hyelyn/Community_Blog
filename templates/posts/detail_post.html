@@ -18,7 +18,12 @@ function checkPermission(post,user){
 <div class="w-full flex item-center justify-center">
 <div class="px-32 py-10 border-solid border-4 border-gray-800 text-center shadow-2xl">
 {{ post.user }}<br>
-{{ post.content }}<br><br>
+{{ post.content }}<br>
+{% if "jpg" or "png" not in post.file.name %}
+{{post.file.name}}
+{% else %}
+<img src="{{ post.file.url }}" alt=" Card image cap"><br>
+{% endif %}
 {{post.created_at}}<br>
 {{post.updated_at}}<br><br>
 
@@ -26,7 +31,7 @@ function checkPermission(post,user){
 <a href={% url 'update_post' post.id %} 
 onclick="return checkPermission('{{post.user}}','{{user}}');"
 class="text-3xl">🖌</a>
-<a href="{% url 'index' %}"><button class="bg-blue-900 text-white hover:bg-green-600 font-bold py-2 px-4 rounded-full">home</button></a>
+<a href="{% url 'home' %}"><button class="bg-blue-900 text-white hover:bg-green-600 font-bold py-2 px-4 rounded-full">home</button></a>
 {% if user.is_staff or user.if_superuser %}
 
 <a href="{% url 'delete_post' post.id%}" 

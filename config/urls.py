@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from core import views
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    #path("index/", views.index, name="index"),
-    #path("index/<str:path>", views.index, name="index"),
+    path("", views.IndexView.as_view(), name="home"),
     path("index/<str:path>", views.IndexView.as_view(), name="index"),
-    path("index/", views.IndexView.as_view(), name="index"),
     path("users/", include("users.urls")),
     path("boards/", include("boards.urls")),
     path("posts/", include("posts.urls")),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
