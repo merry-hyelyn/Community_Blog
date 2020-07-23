@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block page-name %}DELETE
+{% endblock page-name %}
+{% block content %}
+
+<div class="w-full flex item-center justify-center">
+
+<form method=POST>
+{% csrf_token %}
+<span class="font-weight-bold"> 게시판 {{board}}를 정말 삭제하시겠습니까?</span>
+<br><br>
+<button class="btn btn-outline-danger" type="submit">Delete</button>
+</form>
+<button class="btn btn-outline-warning">
+<a href="{% url 'home' %}">Cancel</a></button>
+</div>
+{% endblock %}
