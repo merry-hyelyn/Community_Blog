@@ -19,10 +19,16 @@ from core import views
 
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth.decorators import user_passes_test
 
+manage_permission = user_passes_test(lambda u: u.is_staff or u.is_superuser,
+                                     login_url='home')
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.IndexView.as_view(), name="home"),
+    path("<int:pk>",
+         manage_permission(views.BoardDelete.as_view()),
+         name="delete"),
     path("index/<str:path>", views.IndexView.as_view(), name="index"),
     path("users/", include("users.urls")),
     path("boards/", include("boards.urls")),
