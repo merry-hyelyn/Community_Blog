@@ -12,6 +12,6 @@ class CreateBoard(CreateView):
     # method == POST 일 때 실행
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.user = self.request.user
+        self.object.create_user = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
