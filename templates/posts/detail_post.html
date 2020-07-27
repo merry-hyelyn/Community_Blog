@@ -13,30 +13,31 @@ function checkPermission(post,user){
 }
 </script>
 
-<div class="text-center text-2xl text-blue-900 font-bold mb-6">{{post.title}}</div>
+<div class="border w-50 p-3 mx-auto">
+<div class="text-left">
+<h3>{{post.title}}</h3></div>
+<div class="text-left">
 {% csrf_token %}
-<div class="w-full flex item-center justify-center">
-<div class="px-32 py-10 border-solid border-4 border-gray-800 text-center shadow-2xl">
-{{ post.user }}<br>
-{{ post.content }}<br>
-{% if "jpg" or "png" not in post.file.name %}
-{{post.file.name}}
-{% else %}
-<img src="{{ post.file.url }}" alt=" Card image cap"><br>
+
+<p><small>{{ post.user }}</p>
+<span class="text-muted">생성날짜 : {{post.created_at}}</span><br>
+<span class="text-muted">마지막 수정 : {{post.updated_at}}<br><br></span></small>
+
+<h4>{{ post.content }}</h4>
+<br>
+{% if post.file %}
+<a href="{{post.file.url}}" download="newfilename">download</a><br>
 {% endif %}
-{{post.created_at}}<br>
-{{post.updated_at}}<br><br>
 
 
 <a href={% url 'update_post' post.id %} 
 onclick="return checkPermission('{{post.user}}','{{user}}');"
-class="text-3xl">🖌</a>
-<a href="{% url 'home' %}"><button class="bg-blue-900 text-white hover:bg-green-600 font-bold py-2 px-4 rounded-full">home</button></a>
+class="btn btn-outline-success">Edit</a>
+<a href="{% url 'home' %}"><button class="btn btn-outline-info">home</button></a>
 {% if user.is_staff or user.if_superuser %}
 
 <a href="{% url 'delete_post' post.id%}" 
-class="bg-red-600 text-white hover:bg-red-400 font-bold py-2 px-4 rounded-full">
-delete</a>
-</div></div>
+class="btn btn-outline-danger">delete</a>
+</div></div></div></div>
 {% endif %}
 {% endblock content %}
