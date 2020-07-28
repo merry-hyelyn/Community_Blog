@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block page-name %}INDEX{% endblock page-name %}
-{% block content %}
-{% csrf_token %}
 
+{% block content %}
 <script type="text/javascript">
     function checkStep(step){
         console.log("come in")
@@ -35,89 +34,65 @@
 </script>
 
 {% if user.is_authenticated %}
-<div class="text-center text-2xl text-blue-900 font-bold">Board</div><br><br>
-<div class="w-full flex item-center justify-center">
-<div class="box-content h-auto w-64 inline-block px-24 py-10 border-solid border-4 border-gray-800 shadow-2xl ml-128">
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                {% for post in post_list %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{post.title}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{post.user}}</h6>
+                                <a href={% url 'detail_post' post.id%} class="card-link">view</a>
+                                <a href={% url 'update_post' post.id%} class="card-link">edit</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
-<div class="text-blue-900 whitespace-no-wrap text-right">
+{% if post_list %}     
+{% load filters %}
+<div class="container">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
 
-{% if user.is_staff  or user.is_superuser%}
-<div class="text-orange-600 inline font-semibold pr-2">staff</div>
+        {% comment %}
+        {% for post_num in pagination.post_range %}
+            <li class="page-item"><a class="page-link" href="?page={{post_num}}">{{post_num}}</a></li>
+        {% endfor %} 
+        {% endcomment %}
+
+        {% for post_number in post_list.paginator.num_pages|ranges %}
+            <li class="page-item"><a class="page-link" href="?page={{post_number}}">{{post_number}}</a></li>
+        {% endfor %}
+
+        <li class="page-item">
+          <a class="page-link" href="?page={{post_list.paginator.num_pages}}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+</div>
+{% endif %}
+
+{% comment %} 로그인이 되어 있지 않을 때 {% endcomment %}
 {% else %}
+<div class="text-center">
+<button type="button" class="btn btn-outline-success">
+<a href ="{% url 'login' %}">Sign in</a></button>
 
-    {% if user.step == "one" %}
-    <div class="inline text-purple-500 font-semibold pr-2">step 1</div>
-
-    {% elif  user.step == "two"%}
-    <div class="inline text-purple-600 font-semibold pr-2">step 2</div>
-
-    {% else %}
-    <div class="inline text-purple-700 font-semibold pr-2">step 3</div>
-
-{% endif %}{% endif %}
- {{ user }}님
-<a href={% url 'logout'%}><button class="text-blue-900 hover:text-red-600 font-bold py-2 px-2 rounded-full">Sign Out</a></button>
-</div><br>
-
-<ul class="flex border-b">
-
-{% for board in board_list %}
-  <li class="mr-1">
-    <a class="box-border bg-white inline-block py-2 px-4 text-blue-800 hover:text-green-600 font-semibold" href="{% url 'index' board.path %}">{{ board.name }}</a>
-  </li>
-  {% endfor %}
-
-  {% if user.is_staff or user.is_superuser %}
-    <a href="{% url 'create'%}" class="bg-white inline-block py-2 px-4 text-blue-800 hover:text-green-600 font-bold">+</a>
+<button type="button" class="btn btn-outline-info">
+<a href ="{% url 'signup' %}">Sign up</a></button>
+</div>
 {% endif %}
-</ul>
-
-
-<a href = {% url 'new_post' %} class="text-4xl" 
-onclick="return checkStep('{{user.step}}');"><div class="text-right">📝</div></a>
-{% csrf_token %}
-
-{% for post in post_list %}
-{% if post.secret == "true" %}
-<div class="border-red-600 border-solid border-2 pl-6 py-2">
-<div class="float-left">{{ post.title }}</div>
-
-{% else %}
-<div class="border-blue-900 border-solid border-2 pl-6 py-2">
-<div class="float-left">{{ post.title }}</div>
-{% endif %}
-
-<div class="flex justify-end">
-<div class="pr-2">{{ post.user }}</div>
-
-<a href={% url 'detail_post' post.id %} class="text-2xl text-blue-900"
-onclick="return checkSecret('{{post.user}}','{{post.secret}}');">
-<div class="pr-6">→</div></a></div></div>
-<br>
-{% endfor %}
-
-<br><br>
 </div>
-</div>
-</div>
-
-{% else%}
-<div class="text-center text-2xl text-blue-900 font-bold mb-6">Log In</div><br><br>
-<div class="w-full flex item-center justify-center">
-<div class="inline-block px-32 py-10 border-solid border-4 border-gray-800 text-center shadow-2xl">
-
-<button class="bg-blue-900 text-white hover:bg-green-600 font-bold py-2 px-4 rounded-full
-"><a href="{% url 'login' %}">Sign In</a></button>
-<button class="text-blue-900 hover:text-green-600 font-bold py-2 px-4 rounded-full"><a href="{% url 'signup'%}">Sign Up</a></button>
-</div>
-</div></div>
-{% if messages %}
-<script>
-{% for message in messages %}
-alert("{{message}}");
-{% endfor %}
-</script>
-{% endif %}
-
-{% endif %}     
 {% endblock content %}
