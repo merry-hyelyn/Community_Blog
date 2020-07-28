@@ -14,30 +14,33 @@ function checkPermission(post,user){
 </script>
 
 <div class="border w-50 p-3 mx-auto">
-<div class="text-left">
-<h3>{{post.title}}</h3></div>
-<div class="text-left">
-{% csrf_token %}
+    <div class="text-left">
+        <h3>{{post.title}}</h3>
+    </div>
 
-<p><small>{{ post.user }}</p>
-<span class="text-muted">생성날짜 : {{post.created_at}}</span><br>
-<span class="text-muted">마지막 수정 : {{post.updated_at}}<br><br></span></small>
+    {% csrf_token %}
 
-<h4>{{ post.content }}</h4>
-<br>
-{% if post.file %}
-<a href="{{post.file.url}}" download="newfilename">download</a><br>
-{% endif %}
+    <p><small>{{ post.user }}</p>
+    <span class="text-muted">생성날짜 : {{post.created_at}}</span><br>
+    <span class="text-muted">마지막 수정 : {{post.updated_at}}</span></small>
+    <br><br>
+
+    <h4>{{ post.content }}</h4>
+    <br>
+    
+    {% if post.file %}
+        <a href="{{post.file.url}}" download="newfilename">download</a><br>
+    {% endif %}
 
 
-<a href={% url 'update_post' post.id %} 
-onclick="return checkPermission('{{post.user}}','{{user}}');"
-class="btn btn-outline-success">Edit</a>
-<a href="{% url 'home' %}"><button class="btn btn-outline-info">home</button></a>
-{% if user.is_staff or user.if_superuser %}
-
-<a href="{% url 'delete_post' post.id%}" 
-class="btn btn-outline-danger">delete</a>
-</div></div></div></div>
-{% endif %}
+    <a href={% url 'update_post' post.id %} 
+    onclick="return checkPermission('{{post.user}}','{{user}}');"
+    class="btn btn-outline-success">Edit</a>
+    
+    <a href="{% url 'home' %}"><button class="btn btn-outline-info">home</button></a>
+    {% if user.is_staff or user.if_superuser %}
+        <a href="{% url 'delete_post' post.id%}" 
+        class="btn btn-outline-danger">delete</a>
+    {% endif %}
+</div>
 {% endblock content %}
