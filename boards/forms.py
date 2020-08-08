@@ -15,9 +15,14 @@ class BoardForm(forms.ModelForm):
         ]
 
         widgets = {
+            "name":
+            forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "게시판 이름",
+            }),
             "path":
             forms.TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "위와 동일한 이름 권장",
+                "placeholder": "게시판 이름과 동일한 이름 권장",
             }),
         }
