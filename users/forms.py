@@ -28,3 +28,17 @@ class UserForm(forms.ModelForm):
             "email": "이메일",
             "password": "비밀번호",
         }
+
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "password",
+        ]
+
+        lable = {
+            "username": "이름",
+            "password": "비밀번호",
+        }
