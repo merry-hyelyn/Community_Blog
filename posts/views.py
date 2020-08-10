@@ -13,8 +13,6 @@ class CreatePost(CreateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
-        print(self.request.FILES)
-        print(form)
 
         if form.is_valid():
             self.object = form.save(commit=False)
@@ -57,8 +55,4 @@ class DeletePost(DeleteView):
     success_url = reverse_lazy("home")
 
     def get_object(self):
-        return get_object_or_404(Post, pk=self.kwargs.get("pk"))
-
-
-class FileDownloadView(View):
-    pass
+        return get_object_or_404(Post, pk=self.kwargs.get('pk'))
