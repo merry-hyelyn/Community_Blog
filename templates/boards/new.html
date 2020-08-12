@@ -1,31 +1,24 @@
 {% extends 'base.html' %}
 {% block page-name %}BOARD{% endblock page-name %}
-
 {% block content %}
 
-<div class="w-full flex item-center justify-center">
-<div class="inline-block px-32 py-10 border-solid border-4 border-gray-800 text-center shadow-2xl">
+<div class="border w-50 p-3 mx-auto">
+<h3>New Board</h3>
+<form action="{% url 'create'%}" method="POST" style="display:inline;">
+    {% csrf_token %}
+        {{form.name.label_tag}}
+        {{form.name}}
 
-<form action="{% url 'create'%}" method="POST">
-{% csrf_token %}
+        {{form.path.label_tag}}
+        {{form.path}}    
+    <br>
 
-{{form.name.label_tag}}
-<div class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
-{{form.name}}</div><br>
-
-{{form.path.label_tag}}
-<div class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
-{{form.path}}</div><br>
-
-게시판 생성자 : 
-<div class="inline-block">
-{{ user }}</div>
-<br><br>
-<button type = "submit"
-class="bg-blue-900 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
-Add</button>
-<button class="text-red-600 font-bold py-2 px-4 rounded-full">
-<a href="{% url 'index' %}">Cancel</a></button>
-
-</form></div></div>
+    게시판 생성자 : 
+    {{ user }}
+    <br><br>
+    <button type = "submit" class="btn btn-outline-success">Add</button>
+</form>
+<button class="btn btn-outline-danger">
+<a href="{% url 'home' %}">Cancel</a></button>
+</div>
 {% endblock content %}
