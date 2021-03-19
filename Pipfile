@@ -38,7 +38,7 @@ whitenoise = "==5.1.0"
 wrapt = "==1.12.1"
 yapf = "==0.30.0"
 zipp = "==3.1.0"
-Django = "==3.0.7"
+Django = "==3.1.6"
 
 [requires]
 python_version = "3.6"
